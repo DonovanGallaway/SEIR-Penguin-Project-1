@@ -22,6 +22,22 @@ const scoreAdd = (player) => {
 }
 
 
+const titleScreen = () => {
+    $('#page').hide()
+    $('body').css('background-image','url(https://www.desktopbackground.org/p/2015/04/24/937687_dune-wallpapers_1592x1000_h.jpg)')
+    $('body').prepend($('<div>').attr('id', 'title'))
+    $('#title').append($('<h1>').text('Welcome to Dune'))
+    $('#title').append($('<h2>').text('The Trivia Game'))
+    $('#title').append($('<p>').text('Click here to continue'))
+    $('#title').on('click', () =>{
+        $('body').css('background-image', 'url(https://cdna.artstation.com/p/assets/images/images/030/613/370/large/jorge-hardt-dune-desktop-wallpaper-hd.jpg?1601131509)')
+        $('#title').remove()
+        $('#page').show()
+        mainGame()
+    })
+
+
+}
 
 const mainGame = () => {
     // Grabs the trivia data
@@ -41,7 +57,7 @@ const questionQueue = (index, data) => {
     const compareAnswers = (text, correct) => {
         $('#game').empty() //Displays the answer next, so emptying makes it cleaner
         if (text===correct){
-             $('#game').append($('<h1>').text("Correct!").css('color','green').attr('id','truth'))
+             $('#game').append($('<h1>').text("Correct!").css('color','white').attr('id','truth'))
              if (p1Turn) {
                  scoreAdd(1)
              } else {
@@ -51,7 +67,7 @@ const questionQueue = (index, data) => {
              $('#game').append($('<h1>').text("Wrong!").css('color','red').attr('id','truth'))
          }
          $('#game').append($('<p>').text('Click above to continue'))
-         $('#game').append($('<h3>').text(data.items[index].fields.answerText).attr('id','answerText'))
+         $('#game').append($('<h1>').text(data.items[index].fields.answerText).attr('id','answerText'))
         //  console.log(data.items.length)
         //  console.log(index)
         // This if statement effectively iterates through the questions as long as a question exists. If it doesn't, we tally up the score
@@ -65,32 +81,6 @@ const questionQueue = (index, data) => {
             $('#truth').on('click', gameOver)
          }
     }
-    
-    // Makes the question
-    const $question = $('<h1>').text(data.items[index].fields.question)
-    // Make an ul to put answers
-    const $answers = $('<ul>')
-    .append($('<li>').text(data.items[index].fields.a).attr('id','a'))
-    .append($('<li>').text(data.items[index].fields.b).attr('id','b'))
-    .append($('<li>').text(data.items[index].fields.c).attr('id','c'))
-    .append($('<li>').text(data.items[index].fields.d).attr('id','d'))
-    const corrAnswer = data.items[index].fields.answer
-    // console.log(corrAnswer)
-    $('#game').append($question).append($('<br>')).append($answers)
-
-    // Add on-click function for answers. The compareAnswers function also resets game state
-    $('#a').on('click', () => {
-        compareAnswers($('#a').text(), corrAnswer)
-    })
-    $('#b').on('click', () => {
-        compareAnswers($('#b').text(), corrAnswer)
-    })
-    $('#c').on('click', () => {
-        compareAnswers($('#c').text(), corrAnswer)
-    })
-    $('#d').on('click', () => {
-        compareAnswers($('#d').text(), corrAnswer)
-    })
     const gameOver = () => {
         // Originally had this empty out the whole body and try to reset that way, but that killed the divs I had hard-coded into html, so I added some stuff to empty out so the game could be reset.
         $('#game').empty()
@@ -115,25 +105,36 @@ const questionQueue = (index, data) => {
         })
     }
     
-}
-}
+    // Makes the question
+    const $question = $('<h1>').text(data.items[index].fields.question).animate({opacity:1},5000)
+    // Make an ul to put answers
+    const $answers = $('<ul>')
+    .append($('<li>').text(data.items[index].fields.a).attr('id','a'))
+    .append($('<li>').text(data.items[index].fields.b).attr('id','b'))
+    .append($('<li>').text(data.items[index].fields.c).attr('id','c'))
+    .append($('<li>').text(data.items[index].fields.d).attr('id','d'))
+    const corrAnswer = data.items[index].fields.answer
+    // console.log(corrAnswer)
+    $('#game').append($question).append($('<br>')).append($answers)
 
-const titleScreen = () => {
-    $('#page').hide()
-    $('body').css('background-image','url(https://www.desktopbackground.org/p/2015/04/24/937687_dune-wallpapers_1592x1000_h.jpg)')
-    $('body').prepend($('<div>').attr('id', 'title'))
-    $('#title').append($('<h1>').text('Welcome to Dune'))
-    $('#title').append($('<h2>').text('The Trivia Game'))
-    $('#title').append($('<p>').text('Click here to continue'))
-    $('#title').on('click', () =>{
-        $('body').css('background-image', 'url(https://www.teahub.io/photos/full/177-1777854_wallpaper-desert-hill-dusk-sand-dunes-desert-dunes.jpg)')
-        $('#title').remove()
-        $('#page').show()
-        mainGame()
+    // Add on-click function for answers. The compareAnswers function also resets game state
+    $('#a').on('click', () => {
+        compareAnswers($('#a').text(), corrAnswer)
+    })
+    $('#b').on('click', () => {
+        compareAnswers($('#b').text(), corrAnswer)
+    })
+    $('#c').on('click', () => {
+        compareAnswers($('#c').text(), corrAnswer)
+    })
+    $('#d').on('click', () => {
+        compareAnswers($('#d').text(), corrAnswer)
     })
 
-
+    
 }
+}
+
 
 
 titleScreen()

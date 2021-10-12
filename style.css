@@ -32,6 +32,49 @@ body {
     animation-duration: 5s;
 }
 
+
+#page {
+    width: 100vw;
+    height: 100vw;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-position: inside;
+    list-style-type: none;
+    padding: .5em;
+    font-size: 1.2em;
+}
+
+li:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+#game {
+    margin: 5vw;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#scores {
+    margin: 5vw;
+    padding: .5em 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#scores *{
+    margin: 0 5vw;
+}
+
+#truth,.reset, #title {
+    cursor: pointer;
+}
+
 @keyframes fade1 {
     0% {
         opacity: 0;
@@ -74,48 +117,6 @@ body {
     }
 }
 
-#page {
-    width: 100vw;
-    height: 100vw;
-}
-
-ul {
-    padding: 0;
-}
-
-li {
-    list-style-position: inside;
-    list-style-type: none;
-    padding: .5em;
-    font-size: 1.2em;
-}
-
-li:hover{
-    color: blue;
-    cursor: pointer;
-}
-
-#game {
-    margin: 5vw;
-    background-color: rgba(255,255,255,0.2);
-    overflow: scroll;
-}
-
-#scores {
-    margin: 5vw;
-    padding: .5em 0;
-    display: flex;
-    justify-content: space-around;
-    background-color: rgba(255,255,255,0.2);
-}
-
-#scores *{
-    margin: 0 5vw;
-}
-
-#truth,.reset, #title {
-    cursor: pointer;
-}
 
 @media screen and (orientation: landscape) and (max-width: 768px) {
     body {
