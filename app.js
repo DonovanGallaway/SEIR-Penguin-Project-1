@@ -51,7 +51,7 @@ const questionQueue = (index, data) => {
              $('#game').append($('<h1>').text("Wrong!").css('color','red').attr('id','truth'))
          }
          $('#game').append($('<p>').text('Click above to continue'))
-         $('#game').append($('<h3>').text(data.items[index].fields.answerText))
+         $('#game').append($('<h3>').text(data.items[index].fields.answerText).attr('id','answerText'))
         //  console.log(data.items.length)
         //  console.log(index)
         // This if statement effectively iterates through the questions as long as a question exists. If it doesn't, we tally up the score
