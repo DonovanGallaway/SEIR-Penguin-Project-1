@@ -67,7 +67,7 @@ const questionQueue = (index, data) => {
     }
     
     // Makes the question
-    const $question = $('<h2>').text(data.items[index].fields.question)
+    const $question = $('<h1>').text(data.items[index].fields.question)
     // Make an ul to put answers
     const $answers = $('<ul>')
     .append($('<li>').text(data.items[index].fields.a).attr('id','a'))
@@ -76,7 +76,7 @@ const questionQueue = (index, data) => {
     .append($('<li>').text(data.items[index].fields.d).attr('id','d'))
     const corrAnswer = data.items[index].fields.answer
     // console.log(corrAnswer)
-    $('#game').append($question).append($answers)
+    $('#game').append($question).append($('<br>')).append($answers)
 
     // Add on-click function for answers. The compareAnswers function also resets game state
     $('#a').on('click', () => {
@@ -124,12 +124,13 @@ const titleScreen = () => {
     $('body').prepend($('<div>').attr('id', 'title'))
     $('#title').append($('<h1>').text('Welcome to Dune'))
     $('#title').append($('<h2>').text('The Trivia Game'))
-    $('#title').append($('<p>').text('Click here to continue').on('click', () =>{
+    $('#title').append($('<p>').text('Click here to continue'))
+    $('#title').on('click', () =>{
         $('body').css('background-image', 'url(https://www.teahub.io/photos/full/177-1777854_wallpaper-desert-hill-dusk-sand-dunes-desert-dunes.jpg)')
         $('#title').remove()
         $('#page').show()
         mainGame()
-    }))
+    })
 
 
 }
