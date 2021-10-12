@@ -3,6 +3,11 @@ body {
     margin: auto;
 }
 
+#page {
+    width: 100vw;
+    height: 100vw;
+}
+
 ul {
     padding: 0;
 }
@@ -10,7 +15,7 @@ ul {
 li {
     list-style-position: inside;
     list-style-type: none;
-    padding: 20px;
+    padding: 2vw;
 }
 
 li:hover{
@@ -19,14 +24,19 @@ li:hover{
 }
 
 #game {
-    margin: 100px;
+    margin: 5vw;
 }
 
 #scores {
+    margin: 5vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 #scores *{
-    padding: 0 50px;
+    margin: 0 5vw;
+}
+
+#truth,.reset {
+    cursor: pointer;
 }
