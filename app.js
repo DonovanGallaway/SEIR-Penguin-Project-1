@@ -22,10 +22,16 @@ const scoreAdd = (player) => {
 }
 
 
-// Set up the game. I did this in a function instead of a variable because I intended to add a title screen as a separate function, but due to the nature of the promise call I may end up just making this a global thing and putting the title screen as a function inside this whole "Main Game"
 
-// This not only makes for slightly drier code, but also gives me an easy way to start the game when I want
-// Note: due to the data being called as avariable inside "main game", this has to be inside "main game", which is another argument for making the promise request globally accessible.
+const mainGame = () => {
+    // Grabs the trivia data
+    // Note: due to the data being called as avariable inside "main game", this has to be inside "main game"
+    $.ajax(URL).then((data)=> {
+    console.log(data)
+    let i = 0; // This i acts as an iterator through the various runs of the function without needing to have everything in a giant "for" loop
+    questionQueue(i, data)
+    })
+
 const questionQueue = (index, data) => {
     $('#game').empty(); // Reset game state
     $('#score1').text(p1Score) //Update scores (0 for reset state)
@@ -110,9 +116,23 @@ const questionQueue = (index, data) => {
     }
     
 }
-// Grabs the trivia data
-$.ajax(URL).then((data)=> {
-    console.log(data)
-    let i = 0; // This i acts as an iterator through the various runs of the function without needing to have everything in a giant "for" loop
-    questionQueue(i, data)
-    })
+}
+
+const titleScreen = () => {
+    $('#page').hide()
+    $('body').css('background-image','url(https://www.desktopbackground.org/p/2015/04/24/937687_dune-wallpapers_1592x1000_h.jpg)')
+    $('body').prepend($('<div>').attr('id', 'title'))
+    $('#title').append($('<h1>').text('Welcome to Dune'))
+    $('#title').append($('<h2>').text('The Trivia Game'))
+    $('#title').append($('<p>').text('Click here to continue').on('click', () =>{
+        $('body').css('background-image', 'url(https://www.teahub.io/photos/full/177-1777854_wallpaper-desert-hill-dusk-sand-dunes-desert-dunes.jpg)')
+        $('#title').remove()
+        $('#page').show()
+        mainGame()
+    }))
+
+
+}
+
+
+titleScreen()
