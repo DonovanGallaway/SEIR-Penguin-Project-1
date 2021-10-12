@@ -1,0 +1,32 @@
+body {
+    text-align: center;
+    margin: auto;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-position: inside;
+    list-style-type: none;
+    padding: 20px;
+}
+
+li:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+#game {
+    margin: 100px;
+}
+
+#scores {
+    display: flex;
+    justify-content: center;
+}
+
+#scores *{
+    padding: 0 50px;
+}

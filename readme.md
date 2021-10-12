@@ -28,3 +28,10 @@ I fixed it with
 ```js
 console.log("fixed")
 ```
+
+
+#### Example Table
+
+| Column1 | Column2 | Column3|
+|---------|---------|--------|
+| thing 1 | thing 2 | thing 3|
