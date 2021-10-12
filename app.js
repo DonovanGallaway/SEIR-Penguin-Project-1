@@ -23,7 +23,7 @@ const scoreAdd = (player) => {
 const mainGame = () => {
     $.ajax(URL).then((data)=> {
         console.log(data)
-        let i = 18;
+        let i = 0;
         questionQueue(i, data)
     })
 }
