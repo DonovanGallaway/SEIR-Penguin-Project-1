@@ -11,13 +11,20 @@ let p1Turn = true;
 const scoreAdd = (player) => {
     if (player === 1) {
         p1Score++
-        p1Turn = false;
         $('#score1').text(p1Score)
+
     }
     if (player === 2) {
         p2Score++
-        p1Turn = true;
         $('#score2').text(p2Score)
+    }
+}
+
+const myTurn = () => {
+    if (p1Turn) {
+        p1Turn = false;
+    } else if (!p1Turn){
+        p1Turn = true;
     }
 }
 
@@ -66,6 +73,7 @@ const questionQueue = (index, data) => {
          } else {
              $('#game').append($('<h1>').text("Wrong!").css('color','red').attr('id','truth'))
          }
+         myTurn()
          $('#game').append($('<p>').text('Click above to continue'))
          $('#game').append($('<h1>').text(data.items[index].fields.answerText).attr('id','answerText'))
         //  console.log(data.items.length)
