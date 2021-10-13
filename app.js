@@ -7,6 +7,9 @@ let p1Score = 0;
 let p2Score = 0;
 let p1Turn = true;
 
+// Empty array to push done values into
+const doneQs = []
+
 // Score add function to save a bit of clarity
 const scoreAdd = (player) => {
     if (player === 1) {
@@ -28,14 +31,14 @@ const myTurn = () => {
     }
 }
 
-
 const titleScreen = () => {
     $('#page').hide()
     $('body').css('background-image','url(https://www.desktopbackground.org/p/2015/04/24/937687_dune-wallpapers_1592x1000_h.jpg)')
     $('body').prepend($('<div>').attr('id', 'title'))
-    $('#title').append($('<h1>').text('Welcome to Dune'))
+    $('#title').append($('<h1>').text('Welcome to DUNE'))
     $('#title').append($('<h2>').text('The Trivia Game'))
     $('#title').append($('<p>').text('Click here to continue'))
+    $('#title').append($('<p>').text('For best viewing experience, please rotate your phone').attr('id','portrait'))
     $('#title').on('click', () =>{
         $('body').css('background-image', 'url(https://cdna.artstation.com/p/assets/images/images/030/613/370/large/jorge-hardt-dune-desktop-wallpaper-hd.jpg?1601131509)')
         $('#title').remove()
@@ -46,13 +49,22 @@ const titleScreen = () => {
 
 }
 
+const qCycle = (length) => {
+    let q = Math.floor(Math.random()*length)
+    while (doneQs.includes(q)){
+        q = Math.floor(Math.random()*length)
+    }
+    doneQs.push(q)
+    return q
+}
+
 const mainGame = () => {
     // Grabs the trivia data
     // Note: due to the data being called as avariable inside "main game", this has to be inside "main game"
     $.ajax(URL).then((data)=> {
     console.log(data)
     let i = 0; // This i acts as an iterator through the various runs of the function without needing to have everything in a giant "for" loop
-    questionQueue(i, data)
+    questionQueue(qCycle(data.items.length), data)
     })
 
 const questionQueue = (index, data) => {
@@ -79,10 +91,10 @@ const questionQueue = (index, data) => {
         //  console.log(data.items.length)
         //  console.log(index)
         // This if statement effectively iterates through the questions as long as a question exists. If it doesn't, we tally up the score
-         if (data.items[index+1]){
+         if (data.items.length > doneQs.length){
              $('#truth').on('click', () => {
-                console.log('clicked')
-                questionQueue(index+1, data) 
+                // console.log('clicked')
+                questionQueue(qCycle(data.items.length), data) 
              })
          }
          else {
@@ -109,7 +121,8 @@ const questionQueue = (index, data) => {
         $('.reset').on('click', ()=>{
             $('#game').empty()
             $('#result').empty()
-            questionQueue(0,data)
+            doneQs.length = 0 // Cool trick to instantly empty an array
+            titleScreen()
         })
     }
     

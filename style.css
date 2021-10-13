@@ -14,7 +14,13 @@ body {
     position: fixed;
     right: 5vw;
     color: rgb(255, 255, 255);
-    background: rgba(0,0,0,0.2)
+    background: rgba(0,0,0,0.2);
+    width: 20%;
+    height: 100%;
+}
+
+#portrait {
+    display: none;
 }
 
 #title h1 {
@@ -142,8 +148,21 @@ li:hover{
 
 }
 
+@media screen and (orientation: portrait) and (max-width: 768px) {
+
+    #title {
+        width: 50%;
+    }
+
+    #portrait{
+        display: block;
+    }
+
+}
+
 @media screen and (min-width: 768px) {
     body {
     background-size: 100vw auto;
+    font-size: 2em;
     }
 }
