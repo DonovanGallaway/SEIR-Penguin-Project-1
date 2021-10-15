@@ -73,8 +73,8 @@ li:hover{
 }
 
 #scores {
-    margin: 5vw;
-    padding: .5em 0;
+    margin: 7vw;
+    padding: 0;
     display: flex;
     justify-content: space-around;
     background-color: rgba(0,0,0,0.5);
