@@ -10,6 +10,13 @@ body {
     font-weight: bold;
 }
 
+.restart {
+    position: absolute;
+    top: 0vw;
+    right: 2vw;
+    cursor: pointer;
+}
+
 #title {
     position: fixed;
     right: 5vw;

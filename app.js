@@ -33,6 +33,7 @@ const myTurn = () => {
 
 const titleScreen = () => {
     $('#page').hide()
+    $('.restart').hide()
     $('body').css('background-image','url(https://www.desktopbackground.org/p/2015/04/24/937687_dune-wallpapers_1592x1000_h.jpg)')
     $('body').prepend($('<div>').attr('id', 'title'))
     $('#title').append($('<h1>').text('Welcome to DUNE'))
@@ -43,11 +44,22 @@ const titleScreen = () => {
         $('body').css('background-image', 'url(https://cdna.artstation.com/p/assets/images/images/030/613/370/large/jorge-hardt-dune-desktop-wallpaper-hd.jpg?1601131509)')
         $('#title').remove()
         $('#page').show()
+        $('.restart').show()
         mainGame()
     })
 
 
 }
+
+$('.restart').on('click', () => {
+    p1Score = 0;
+    p2Score = 0;
+    p1Turn = true;
+    $('#game').empty()
+    $('#result').empty()
+    doneQs.length = 0 // Cool trick to instantly empty an array
+    titleScreen()
+})
 
 const qCycle = (length) => {
     let q = Math.floor(Math.random()*length)
@@ -62,7 +74,7 @@ const mainGame = () => {
     // Grabs the trivia data
     // Note: due to the data being called as avariable inside "main game", this has to be inside "main game"
     $.ajax(URL).then((data)=> {
-    console.log(data)
+    // console.log(data)
     let i = 0; // This i acts as an iterator through the various runs of the function without needing to have everything in a giant "for" loop
     questionQueue(qCycle(data.items.length), data)
     })
@@ -76,7 +88,7 @@ const questionQueue = (index, data) => {
     const compareAnswers = (text, correct) => {
         $('#game').empty() //Displays the answer next, so emptying makes it cleaner
         if (text===correct){
-             $('#game').append($('<h1>').text("Correct!").css('color','white').attr('id','truth'))
+             $('#game').append($('<h1>').text("Correct!").css('color','blue').attr('id','truth'))
              if (p1Turn) {
                  scoreAdd(1)
              } else {
